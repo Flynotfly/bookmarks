@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 # from .forms import LoginForm
 from .forms import UserRegistrationForm
+from .models import Profile
 
 
 # def user_login(request):
@@ -50,6 +51,7 @@ def register(request):
             new_user = user_form.save(commit=False)
             new_user.set_password(user_form.cleaned_data['password'])
             new_user.save()
+            Profile.objects.create(user=new_user)
             return render(
                 request,
                 'account/register_done.html',
