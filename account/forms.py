@@ -29,13 +29,13 @@ class UserRegistrationForm(forms.ModelForm):
         return cd['password']
 
 
-class UserEditForm(forms.Form):
+class UserEditForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
         fields = ['first_name', 'last_name', 'email']
 
 
-class ProfileEditForms(forms.Form):
+class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['date_of_birth', 'photo']
