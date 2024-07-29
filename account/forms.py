@@ -33,3 +33,9 @@ class UserEditForm(forms.Form):
     class Meta:
         model = get_user_model()
         fields = ['first_name', 'last_name', 'email']
+
+
+class ProfileEditForms(forms.Form):
+    class Meta:
+        model = Profile
+        fields = ['date_of_birth', 'photo']
