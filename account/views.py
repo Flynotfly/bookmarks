@@ -75,7 +75,7 @@ def edit(request):
         )
         profile_form = ProfileEditForm(
             instance=request.user.profile,
-            deta=request.POST,
+            data=request.POST,
             files=request.FILES
         )
         if user_form.is_valid() and profile_form.is_valid():
