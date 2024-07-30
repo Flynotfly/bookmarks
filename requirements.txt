@@ -3,3 +3,6 @@ asgiref==3.8.1
 sqlparse==0.5.1
 Pillow==10.4.0
 social-auth-app-django==5.4.2
+django-extensions==3.2.3
+werkzeug==3.0.3
+pyopenssl==24.2.1
