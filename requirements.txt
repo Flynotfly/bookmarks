@@ -6,3 +6,4 @@ social-auth-app-django==5.4.2
 django-extensions==3.2.3
 werkzeug==3.0.3
 pyopenssl==24.2.1
+python-decouple==3.8
