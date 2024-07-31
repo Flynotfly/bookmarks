@@ -16,16 +16,16 @@ class ImageCreateForm(forms.ModelForm):
     def clean_url(self):
         url = self.cleaned_data['url']
         valid_extensions = ['jpg', 'jpeg', 'png']
-        extensions = url.rsplit('.', 1)[1].lower
+        extensions = url.rsplit('.', 1)[1].lower()
         if extensions not in valid_extensions:
             raise forms.ValidationError('This given URL doen not match valid image extensions.')
         return url
 
     def save(self, force_insert=False, force_update=False, commit=True):
         image = super().save(commit=False)
-        image_url = self.cleaned_data('url')
+        image_url = self.cleaned_data['url']
         name = slugify(image.title)
-        exetsion = image_url.rsplir('.', 1)[1].lower()
+        exetsion = image_url.rsplit('.', 1)[1].lower()
         image_name = f'{name}.{exetsion}'
         responce = requests.get(image_url)
         image.image.save(image_name, ContentFile(responce.content), save=False)
