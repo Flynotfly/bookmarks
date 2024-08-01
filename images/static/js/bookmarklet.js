@@ -34,6 +34,15 @@ function bookmarletLaunch() {
         .addEventListener('click', function () {
             bookmarklet.style.display = 'none'
         });
+
+    images = document.querySelectorAll('img[scr$=".jpg"], img[src$=".jprg"], imp[src$="png"]');
+    images.forEach(image => {
+        if (image.naturalWidth >= minWidth && image.naturalHeight >= minHeight) {
+            var imageFound = document.createElement('img');
+            imageFound.src = image.src;
+            imageFound.append(imageFound);
+        }
+    })
 }
 
 bookmarletLaunch()
