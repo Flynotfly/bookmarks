@@ -5,6 +5,7 @@ from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
 from django.views.decorators.http import require_POST
+from actions.utils import create_action
 from .forms import ImageCreateForm
 from .models import Image
 
@@ -18,6 +19,7 @@ def image_create(request):
             new_image = form.save(commit=False)
             new_image.user = request.user
             new_image.save()
+            create_action(request.user, 'bookmarked image', new_image)
             messages.success(request, 'Image added seccessfully')
             return redirect(new_image.get_absolute_url())
     else:
