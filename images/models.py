@@ -38,27 +38,3 @@ class Image(models.Model):
 
     def get_absolute_url(self):
         return reverse('images:detail', args=[self.id, self.slug])
-
-
-class Contact(models.Model):
-    user_from = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        related_name='rel_from_set',
-        on_delete=models.CASCADE
-    )
-    user_to = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        related_name='rel_to_set',
-        on_delete=models.CASCADE
-    )
-    created = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        indexes = [
-            models.Index(fields=['-created'])
-        ]
-
-        ordering = ['-created']
-
-    def __str__(self):
-        return f'{self.user_from} follows {self.user_to}'
