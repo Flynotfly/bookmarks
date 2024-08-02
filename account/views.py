@@ -115,7 +115,7 @@ def user_list(request):
 
 
 @login_required
-def user_details(request, username):
+def user_detail(request, username):
     user = get_object_or_404(User, username=username, is_active=True)
     return render(
         request,
