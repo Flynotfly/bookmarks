@@ -6,9 +6,9 @@ from django.db import models
 
 class Action(models.Model):
     user = models.ForeignKey(
-        settings.USER_AUTH_MODEL,
+        settings.AUTH_USER_MODEL,
         related_name='actions',
-        on_delete=models.CASCADE()
+        on_delete=models.CASCADE
     )
     varb = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
@@ -19,7 +19,7 @@ class Action(models.Model):
         related_name='target_obj',
         on_delete=models.CASCADE
     )
-    taget_id = models.PositiveIntegerField(
+    target_id = models.PositiveIntegerField(
         null=True,
         blank=True
     )
