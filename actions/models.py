@@ -10,7 +10,7 @@ class Action(models.Model):
         related_name='actions',
         on_delete=models.CASCADE
     )
-    varb = models.CharField(max_length=255)
+    verb = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
     target_ct = models.ForeignKey(
         ContentType,
