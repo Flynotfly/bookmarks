@@ -143,6 +143,7 @@ def user_follow(request):
                     user_from=request.user,
                     user_to=user_to
                 )
+                create_action(request.user, 'is following', user_to)
             else:
                 Contact.objects.filter(
                     user_from=request.user,
