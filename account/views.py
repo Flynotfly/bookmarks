@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.http import require_POST
+from actions.utils import create_action
 # from .forms import LoginForm
 from .forms import UserRegistrationForm, UserEditForm, ProfileEditForm
 from .models import Profile, Contact
@@ -54,6 +55,7 @@ def register(request):
             new_user.set_password(user_form.cleaned_data['password'])
             new_user.save()
             Profile.objects.create(user=new_user)
+            create_action(new_user, 'has created an account')
             return render(
                 request,
                 'account/register_done.html',
