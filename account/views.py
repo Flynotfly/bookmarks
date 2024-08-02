@@ -5,6 +5,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.http import require_POST
 from actions.utils import create_action
+from actions.models import Action
 # from .forms import LoginForm
 from .forms import UserRegistrationForm, UserEditForm, ProfileEditForm
 from .models import Profile, Contact
@@ -40,10 +41,23 @@ from .models import Profile, Contact
 
 @login_required
 def dashboard(request):
+
+    # if user doesn't follow anyone: get all actions
+    # else only actions by following users
+
+    actions = Action.objects.exclude(user=request.user)
+    following_ids = request.user.following.values_list('id', flat=True)
+    if following_ids:
+        actions = actions.filter(user_id__in=following_ids)
+    actions = actions[:10]
+
     return render(
         request,
         'account/dashboard.html',
-        {'section': dashboard}
+        {
+            'section': dashboard,
+            'actions': actions,
+        }
     )
 
 
